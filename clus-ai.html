@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>clus.ai — Where enterprises deploy agents that actually work</title>
+<meta name="description" content="A network of vetted forward-deployed engineers and AI-native operators, paired with the strategic layer enterprises need to ship agents into production." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #0a0a08;
+    --ink-2: #14140f;
+    --ink-3: #1c1c16;
+    --paper: #f5f1e8;
+    --paper-dim: #e8e2d3;
+    --rule: #2a2a22;
+    --rule-soft: #1f1f18;
+    --accent: #ff5722;
+    --accent-warm: #f4b860;
+    --muted: #6e6a5e;
+    --muted-2: #4a4640;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 87, 34, 0.08), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(244, 184, 96, 0.04), transparent 60%);
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  .container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px) saturate(160%);
+    background: rgba(10, 10, 8, 0.7);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 32px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .logo-dot {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--paper); }
+
+  .nav-cta {
+    padding: 9px 18px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    color: var(--paper) !important;
+    transition: all 0.2s;
+  }
+
+  .nav-cta:hover {
+    background: var(--paper);
+    color: var(--ink) !important;
+    border-color: var(--paper);
+  }
+
+  /* ============ STATUS BAR ============ */
+  .status-bar {
+    border-bottom: 1px solid var(--rule-soft);
+    padding: 8px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 65px;
+    overflow: hidden;
+  }
+
+  .status-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+    max-width: 1320px;
+    margin: 0 auto;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .status-left { display: flex; gap: 24px; align-items: center; }
+
+  .pulse {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 120px 0 100px;
+    position: relative;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1.hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(56px, 9vw, 128px);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 48px;
+    max-width: 1100px;
+  }
+
+  h1.hero-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent-warm);
+  }
+
+  h1.hero-title .strike {
+    position: relative;
+    display: inline-block;
+  }
+
+  h1.hero-title .strike::after {
+    content: '';
+    position: absolute;
+    top: 52%;
+    left: -2%;
+    right: -2%;
+    height: 4px;
+    background: var(--accent);
+    transform: rotate(-2deg);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: end;
+    margin-top: 80px;
+  }
+
+  .hero-deck {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--paper-dim);
+    font-weight: 300;
+    max-width: 560px;
+  }
+
+  .hero-deck strong {
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    border-radius: 2px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--paper);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--paper);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--paper);
+    border: 1px solid var(--rule);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--paper);
+  }
+
+  .btn .arrow { transition: transform 0.25s; }
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  /* ============ MARQUEE / TICKER ============ */
+  .ticker {
+    border-top: 1px solid var(--rule-soft);
+    border-bottom: 1px solid var(--rule-soft);
+    padding: 18px 0;
+    overflow: hidden;
+    position: relative;
+    background: var(--ink-2);
+  }
+
+  .ticker-inner {
+    display: flex;
+    animation: scroll 60s linear infinite;
+    white-space: nowrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .ticker-item {
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ticker-item .tag {
+    color: var(--accent-warm);
+    font-weight: 600;
+  }
+
+  .ticker-item .sep {
+    color: var(--rule);
+    margin: 0 4px;
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ============ MANIFESTO ============ */
+  .manifesto {
+    padding: 140px 0 120px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    padding-top: 8px;
+  }
+
+  .section-label .num {
+    color: var(--accent);
+    margin-right: 12px;
+  }
+
+  .manifesto-text {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 3vw, 42px);
+    line-height: 1.25;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+  }
+
+  .manifesto-text strong {
+    font-weight: 500;
+    color: var(--paper);
+  }
+
+  .manifesto-text em {
+    font-style: italic;
+    color: var(--accent-warm);
+  }
+
+  .manifesto-text p + p {
+    margin-top: 32px;
+  }
+
+  .manifesto-attribution {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 64px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule-soft);
+    max-width: 600px;
+  }
+
+  /* ============ HOW IT WORKS ============ */
+  .how {
+    padding: 140px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .how-header {
+    margin-bottom: 80px;
+    max-width: 720px;
+  }
+
+  .how-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-top: 24px;
+  }
+
+  .how-header h2 em {
+    font-style: italic;
+    color: var(--accent-warm);
+  }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule-soft);
+    border: 1px solid var(--rule-soft);
+  }
+
+  .how-card {
+    background: var(--ink);
+    padding: 48px 40px;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .how-card:hover {
+    background: var(--ink-2);
+  }
+
+  .how-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 32px;
+    display: block;
+  }
+
+  .how-title {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  .how-title em {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .how-body {
+    color: var(--paper-dim);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .how-detail {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px dashed var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .how-detail span::before {
+    content: '→';
+    color: var(--accent-warm);
+    margin-right: 10px;
+  }
+
+  /* ============ SERVICES ============ */
+  .services {
+    padding: 140px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    margin-bottom: 80px;
+    align-items: end;
+  }
+
+  .services-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-top: 24px;
+  }
+
+  .services-header h2 em {
+    font-style: italic;
+    color: var(--accent-warm);
+  }
+
+  .services-list {
+    border-top: 1px solid var(--rule);
+  }
+
+  .service-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1.5fr 200px;
+    gap: 40px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    align-items: start;
+    transition: padding 0.3s;
+    cursor: pointer;
+  }
+
+  .service-row:hover {
+    padding-left: 16px;
+  }
+
+  .service-row:hover .service-name {
+    color: var(--accent-warm);
+  }
+
+  .service-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .service-name {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    transition: color 0.3s;
+  }
+
+  .service-desc {
+    font-size: 15px;
+    color: var(--paper-dim);
+    line-height: 1.55;
+  }
+
+  .service-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.7;
+  }
+
+  .service-meta .pill {
+    display: inline-block;
+    padding: 4px 8px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    margin-bottom: 6px;
+  }
+
+  /* ============ PROOF ============ */
+  .proof {
+    padding: 140px 0;
+    background: var(--ink-2);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+
+  .stat {
+    border-left: 2px solid var(--accent);
+    padding-left: 24px;
+  }
+
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 72px;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--paper);
+  }
+
+  .stat-num em {
+    font-style: italic;
+    color: var(--accent-warm);
+    font-size: 0.6em;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+
+  /* ============ WHO ============ */
+  .who {
+    padding: 140px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .who-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+
+  .who-block {
+    border: 1px solid var(--rule-soft);
+    padding: 48px;
+    background: var(--ink-2);
+    transition: all 0.3s;
+  }
+
+  .who-block:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .who-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+  }
+
+  .who-title {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .who-title em {
+    font-style: italic;
+    color: var(--accent-warm);
+  }
+
+  .who-body {
+    color: var(--paper-dim);
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .who-list {
+    list-style: none;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  .who-list li {
+    padding: 10px 0;
+    font-size: 14px;
+    color: var(--paper-dim);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .who-list li::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ============ CTA ============ */
+  .cta {
+    padding: 160px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(255, 87, 34, 0.12), transparent 70%);
+    z-index: -1;
+  }
+
+  .cta h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(56px, 8vw, 112px);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 40px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta h2 em {
+    font-style: italic;
+    color: var(--accent-warm);
+  }
+
+  .cta-deck {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: var(--paper-dim);
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto 56px;
+    line-height: 1.5;
+  }
+
+  .form-row {
+    max-width: 540px;
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+  }
+
+  .form-row input {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--paper);
+    padding: 18px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-row input:focus {
+    border-color: var(--accent);
+  }
+
+  .form-row input::placeholder {
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 11px;
+  }
+
+  .cta-fine {
+    margin-top: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 80px 0 40px;
+    border-top: 1px solid var(--rule-soft);
+    background: var(--ink-2);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 80px;
+  }
+
+  .footer-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    margin-bottom: 24px;
+  }
+
+  .footer-mark em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .footer-tag {
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    max-width: 280px;
+    line-height: 1.6;
+  }
+
+  .footer-col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+  }
+
+  .footer-col li {
+    margin-bottom: 12px;
+  }
+
+  .footer-col a {
+    color: var(--paper-dim);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--accent-warm); }
+
+  .footer-base {
+    border-top: 1px solid var(--rule-soft);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* ============ ANIMATIONS ============ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: reveal 1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+
+  @keyframes reveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+
+  /* ============ OPERATORS ============ */
+  .operators {
+    padding: 140px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    background: var(--ink-2);
+    position: relative;
+  }
+
+  .operators::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.4;
+  }
+
+  .operators-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .operators-lede {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 2.6vw, 36px);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    color: var(--paper);
+  }
+
+  .operators-body {
+    color: var(--paper-dim);
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 48px;
+    max-width: 480px;
+  }
+
+  .operators-perks {
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+
+  .operators-perks li {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 16px;
+    align-items: start;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--paper-dim);
+  }
+
+  .operators-perks li strong {
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  .perk-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    padding-top: 4px;
+  }
+
+  /* Form */
+  .operators-form-wrap {
+    position: sticky;
+    top: 100px;
+  }
+
+  .operators-form {
+    background: var(--ink);
+    border: 1px solid var(--rule);
+    padding: 40px;
+    border-radius: 2px;
+  }
+
+  .form-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent-warm);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--rule);
+  }
+
+  .operators-form label {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .operators-form label span {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .operators-form input,
+  .operators-form select,
+  .operators-form textarea {
+    width: 100%;
+    background: var(--ink-2);
+    border: 1px solid var(--rule);
+    color: var(--paper);
+    padding: 14px 16px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 14px;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .operators-form input:focus,
+  .operators-form select:focus,
+  .operators-form textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .operators-form textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: 'Inter Tight', sans-serif;
+    line-height: 1.5;
+  }
+
+  .operators-form select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23f4b860' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+
+  .form-fine {
+    margin-top: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-align: center;
+  }
+
+  .form-success {
+    text-align: center;
+    padding: 40px 16px;
+  }
+
+  .success-mark {
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 24px;
+  }
+
+  .form-success h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .form-success p {
+    color: var(--paper-dim);
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .container { padding: 0 20px; }
+    .nav-inner { padding: 14px 20px; }
+    .nav-links { gap: 18px; font-size: 11px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .status-inner { padding: 0 20px; font-size: 10px; }
+    .status-left .status-item:nth-child(n+2) { display: none; }
+
+    .hero { padding: 60px 0 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+
+    .manifesto, .how, .services, .proof, .who, .cta { padding: 80px 0; }
+    .manifesto-grid, .services-header, .who-grid { grid-template-columns: 1fr; gap: 32px; }
+
+    .how-grid, .proof-grid { grid-template-columns: 1fr; }
+    .how-card { padding: 32px 24px; }
+
+    .service-row {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 28px 0;
+    }
+    .service-meta { text-align: left; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-base { flex-direction: column; gap: 12px; }
+
+    .form-row { flex-direction: column; }
+
+    .who-block { padding: 32px 24px; }
+
+    .operators { padding: 80px 0; }
+    .operators-grid { grid-template-columns: 1fr; gap: 48px; }
+    .operators-form-wrap { position: static; }
+    .operators-form { padding: 28px 20px; }
+    .operators-perks li { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">clus<span class="logo-dot">.ai</span></a>
+    <div class="nav-links">
+      <a href="#manifesto">Thesis</a>
+      <a href="#how">How it works</a>
+      <a href="#services">Services</a>
+      <a href="#who">For whom</a>
+      <a href="#operators">Operators</a>
+      <a href="#contact" class="nav-cta">Start a brief →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="status-bar">
+  <div class="status-inner">
+    <div class="status-left">
+      <span class="status-item"><span class="pulse"></span>Network online</span>
+      <span class="status-item">Operators: 247 vetted</span>
+      <span class="status-item">Active deployments: 38</span>
+    </div>
+    <div class="status-right">
+      <span>SF · NY · LDN · PAR</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow reveal">Index 01 — A network for the agent era</div>
+    <h1 class="hero-title reveal delay-1">
+      Where enterprises<br>
+      <em>actually</em> deploy<br>
+      <span class="strike">consultants</span> agents.
+    </h1>
+
+    <div class="hero-grid">
+      <p class="hero-deck reveal delay-2">
+        Every wave of enterprise tech produces a new generation of operators who know how to ship it. <strong>clus is the network for this one.</strong> Vetted forward-deployed engineers, AI-native operators, and a small senior team that sits between you and the messy work of getting agents into production.
+      </p>
+      <div class="hero-actions reveal delay-3">
+        <a href="#contact" class="btn btn-primary">
+          <span>Brief us on a workflow</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#operators" class="btn btn-secondary">
+          <span>Apply as an operator</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-item"><span class="tag">DEPLOY</span> Series B fintech · agentic AP automation · 6-week pilot <span class="sep">//</span></div>
+    <div class="ticker-item"><span class="tag">SCOPE</span> Mid-market healthcare · prior auth agent · NetSuite + Epic <span class="sep">//</span></div>
+    <div class="ticker-item"><span class="tag">SHIP</span> Public retailer · merchandising co-pilot · 18 stores live <span class="sep">//</span></div>
+    <div class="ticker-item"><span class="tag">MATCH</span> 4-person FDE pod · revenue ops at Series C SaaS <span class="sep">//</span></div>
+    <div class="ticker-item"><span class="tag">DEPLOY</span> PE portco · contract review agent · Ironclad + Salesforce <span class="sep">//</span></div>
+    <div class="ticker-item"><span class="tag">SCOPE</span> Logistics · dispatch agent · 11k carriers integrated <span class="sep">//</span></div>
+    <div class="ticker-item"><span class="tag">SHIP</span> Industrial manufacturer · field service agent · 2.4× FCR <span class="sep">//</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item"><span class="tag">DEPLOY</span> Series B fintech · agentic AP automation · 6-week pilot <span class="sep">//</span></div>
+    <div class="ticker-item"><span class="tag">SCOPE</span> Mid-market healthcare · prior auth agent · NetSuite + Epic <span class="sep">//</span></div>
+    <div class="ticker-item"><span class="tag">SHIP</span> Public retailer · merchandising co-pilot · 18 stores live <span class="sep">//</span></div>
+    <div class="ticker-item"><span class="tag">MATCH</span> 4-person FDE pod · revenue ops at Series C SaaS <span class="sep">//</span></div>
+    <div class="ticker-item"><span class="tag">DEPLOY</span> PE portco · contract review agent · Ironclad + Salesforce <span class="sep">//</span></div>
+    <div class="ticker-item"><span class="tag">SCOPE</span> Logistics · dispatch agent · 11k carriers integrated <span class="sep">//</span></div>
+    <div class="ticker-item"><span class="tag">SHIP</span> Industrial manufacturer · field service agent · 2.4× FCR <span class="sep">//</span></div>
+  </div>
+</div>
+
+<!-- MANIFESTO -->
+<section class="manifesto" id="manifesto">
+  <div class="container">
+    <div class="manifesto-grid">
+      <div class="section-label"><span class="num">02 /</span>Thesis</div>
+      <div>
+        <div class="manifesto-text">
+          <p>The real world will need a <strong>ton of help</strong> getting agents going in the enterprise.</p>
+          <p>Legacy stacks. Fragmented data. Knowledge that was never digitized. <em>Change management.</em> All of it has to happen while the business keeps running.</p>
+          <p>That is not a software problem. It is a <strong>people problem</strong> dressed up as a technology one.</p>
+          <p>Every wave of enterprise tech has produced its own generation of firms who know how to ship it. <em>clus is built for this one.</em></p>
+        </div>
+        <div class="manifesto-attribution">
+          There is no shortcut to getting this work done for the enterprise. The vendors who win are the ones who do it.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="how-header">
+      <div class="section-label"><span class="num">03 /</span>How it works</div>
+      <h2>A network on top, a team <em>underneath.</em></h2>
+    </div>
+
+    <div class="how-grid">
+      <div class="how-card">
+        <span class="how-num">→ 01 / SCOPE</span>
+        <h3 class="how-title">Brief us on the <em>actual</em> workflow.</h3>
+        <p class="how-body">A senior partner runs intake. We diagnose what's worth automating, what isn't, and what your data and change-management debt looks like before anyone writes a line of code.</p>
+        <div class="how-detail">
+          <span>Two-week diagnostic</span>
+          <span>Senior partner led</span>
+          <span>Fixed fee, no spec lock-in</span>
+        </div>
+      </div>
+
+      <div class="how-card">
+        <span class="how-num">→ 02 / MATCH</span>
+        <h3 class="how-title">Pull the <em>right</em> pod from the network.</h3>
+        <p class="how-body">From 247 vetted operators: forward-deployed engineers, RevOps architects, data engineers, SI veterans. Matched to your stack, your industry, your stage. No bench-warming, no rotating juniors.</p>
+        <div class="how-detail">
+          <span>3 to 8 person pods</span>
+          <span>Stack-matched operators</span>
+          <span>Embedded for 90 to 180 days</span>
+        </div>
+      </div>
+
+      <div class="how-card">
+        <span class="how-num">→ 03 / SHIP</span>
+        <h3 class="how-title">Deploy, measure, <em>hand it back.</em></h3>
+        <p class="how-body">We work in production from week one. The deliverable is an agent your team owns, with the change-management work done alongside it. We leave when the metric moves and your people can run it.</p>
+        <div class="how-detail">
+          <span>Production-first delivery</span>
+          <span>Documented handoff</span>
+          <span>Outcome-tied pricing available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label"><span class="num">04 /</span>Practice areas</div>
+      <h2>What we actually <em>do</em>.</h2>
+    </div>
+
+    <div class="services-list">
+      <div class="service-row">
+        <div class="service-num">A.01</div>
+        <div class="service-name">Revenue & GTM agents</div>
+        <div class="service-desc">Quote-to-cash reconstruction, pipeline intelligence, account research agents. Salesforce, HubSpot, NetSuite, Stripe, the whole knot.</div>
+        <div class="service-meta"><span class="pill">Most requested</span><br>Avg. engagement 14 weeks</div>
+      </div>
+
+      <div class="service-row">
+        <div class="service-num">A.02</div>
+        <div class="service-name">Knowledge & document agents</div>
+        <div class="service-desc">Unstructured data is where most enterprise IP lives. Contracts, SOPs, research, support libraries. We build agents that can actually use them.</div>
+        <div class="service-meta"><span class="pill">High leverage</span><br>Box, SharePoint, Drive, Notion</div>
+      </div>
+
+      <div class="service-row">
+        <div class="service-num">A.03</div>
+        <div class="service-name">M&A integration</div>
+        <div class="service-desc">Acquired a company? Integrating thirty? We've shipped this at scale. Systems mapping, data migration, GTM rationalization, with agents accelerating each step.</div>
+        <div class="service-meta"><span class="pill">Senior-led</span><br>34-acquisition lineage</div>
+      </div>
+
+      <div class="service-row">
+        <div class="service-num">A.04</div>
+        <div class="service-name">Forward-deployed pods on demand</div>
+        <div class="service-desc">You have an agent vendor but no implementation muscle. We embed alongside the vendor, run change management, and own the outcome.</div>
+        <div class="service-meta"><span class="pill">Fastest start</span><br>2-week ramp</div>
+      </div>
+
+      <div class="service-row">
+        <div class="service-num">A.05</div>
+        <div class="service-name">Operator placement</div>
+        <div class="service-desc">For founders and CIOs hiring full-time AI-native talent. We've already met them. Senior FDEs, agent product leads, RevOps architects.</div>
+        <div class="service-meta"><span class="pill">Network access</span><br>Retained, success-tied</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof">
+  <div class="container">
+    <div class="section-label" style="margin-bottom: 56px;"><span class="num">05 /</span>Numbers</div>
+    <div class="proof-grid">
+      <div class="stat">
+        <div class="stat-num">247</div>
+        <div class="stat-label">Vetted operators in the network across SF, NY, London, Paris</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">11<em>K</em></div>
+        <div class="stat-label">Headcount integrated through prior M&A engagements</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">90<em>d</em></div>
+        <div class="stat-label">Median time from brief to first agent in production</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">12<em>+</em></div>
+        <div class="stat-label">Industry verticals covered, from PE portcos to public retailers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="who" id="who">
+  <div class="container">
+    <div class="services-header" style="margin-bottom: 64px;">
+      <div class="section-label"><span class="num">06 /</span>For whom</div>
+      <h2>Two kinds of <em>people</em> hire us.</h2>
+    </div>
+
+    <div class="who-grid">
+      <div class="who-block">
+        <span class="who-tag">Track 01</span>
+        <h3 class="who-title">CIOs & COOs at <em>scaling</em> enterprises.</h3>
+        <p class="who-body">You have legacy systems, real revenue, and a board that wants an AI story. You don't need a deck. You need someone who has actually shipped this work, can sit alongside your team, and won't pretend the data is clean when it isn't.</p>
+        <ul class="who-list">
+          <li>$200M to $5B revenue</li>
+          <li>Mid-modernization stack</li>
+          <li>Active M&A or PE-backed</li>
+        </ul>
+      </div>
+
+      <div class="who-block">
+        <span class="who-tag">Track 02</span>
+        <h3 class="who-title">Founders building <em>agent-native</em> companies.</h3>
+        <p class="who-body">You're designing the org around agents from day one. You need senior operators on demand, vetted FDE pods, and a partner who understands both the vendor side and the buyer side because we've sat in both chairs.</p>
+        <ul class="who-list">
+          <li>Series A through C</li>
+          <li>AI-first product</li>
+          <li>FF, a16z, Sequoia portfolio</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPERATORS -->
+<section class="operators" id="operators">
+  <div class="container">
+    <div class="services-header" style="margin-bottom: 64px;">
+      <div class="section-label"><span class="num">07 /</span>The network</div>
+      <h2>Apply to the <em>network</em>.</h2>
+    </div>
+
+    <div class="operators-grid">
+      <div class="operators-copy">
+        <p class="operators-lede">
+          The shortage is not engineers. It is engineers who have actually shipped agents into a Fortune 500 stack and lived to tell.
+        </p>
+        <p class="operators-body">
+          clus is closed by default. We invite operators who have done the work, vouch for each other, and want a steady flow of senior briefs without selling themselves into a Big-4 backlog.
+        </p>
+        <ul class="operators-perks">
+          <li><span class="perk-num">01</span><span><strong>Senior briefs only.</strong> No staff-aug roulette. We send you work that fits your stack and stage.</span></li>
+          <li><span class="perk-num">02</span><span><strong>You keep your shop.</strong> Solo, boutique, or studio, doesn't matter. We add demand, not overhead.</span></li>
+          <li><span class="perk-num">03</span><span><strong>Real rates.</strong> Engagements are scoped to outcome and priced like product work, not hourly.</span></li>
+          <li><span class="perk-num">04</span><span><strong>A real room.</strong> Private Slack, monthly dinners, shared playbooks. A peer group, not a panel.</span></li>
+        </ul>
+      </div>
+
+      <div class="operators-form-wrap">
+        <div class="operators-form">
+          <div class="form-tag">→ Operator application</div>
+          <form onsubmit="event.preventDefault(); this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <label>
+              <span>Name</span>
+              <input type="text" required placeholder="First and last" />
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" required placeholder="you@domain.com" />
+            </label>
+            <label>
+              <span>LinkedIn or portfolio</span>
+              <input type="url" required placeholder="https://" />
+            </label>
+            <label>
+              <span>Strongest domain</span>
+              <select required>
+                <option value="">Select one</option>
+                <option>Revenue & GTM systems</option>
+                <option>Knowledge & document agents</option>
+                <option>M&A integration</option>
+                <option>Forward-deployed engineering</option>
+                <option>Data engineering / RAG</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label>
+              <span>One agent you have shipped to production</span>
+              <textarea required rows="3" placeholder="What it did, what stack, what scale. Two sentences."></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit" style="width: 100%; justify-content: center;">
+              <span>Apply to the network</span>
+              <span class="arrow">→</span>
+            </button>
+            <div class="form-fine">By invitation. We review weekly. Reply within 7 days, yes or no.</div>
+          </form>
+          <div class="form-success" style="display:none;">
+            <div class="success-mark">✓</div>
+            <h4>Application received.</h4>
+            <p>We review weekly and reply within 7 days, either way. If a current brief matches your profile, expect a faster note.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="section-label" style="text-align: left; margin-bottom: 32px;"><span class="num">08 /</span>Start</div>
+    <h2>The work is real.<br><em>So is the help.</em></h2>
+    <p class="cta-deck">Tell us what you're trying to ship. A senior partner replies within 48 hours, no SDR, no sequence.</p>
+    <form class="form-row" onsubmit="event.preventDefault(); this.querySelector('input').value=''; this.nextElementSibling.textContent='Received. A partner will be in touch.';">
+      <input type="email" placeholder="work email" required />
+      <button class="btn btn-primary" type="submit">
+        <span>Request a brief</span>
+        <span class="arrow">→</span>
+      </button>
+    </form>
+    <div class="cta-fine">No newsletter. No nurture. Just a reply.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-mark">clus<em>.</em>ai</div>
+        <p class="footer-tag">A network firm for the agent era. Built by operators, for operators.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Practice</h4>
+        <ul>
+          <li><a href="#services">Revenue & GTM</a></li>
+          <li><a href="#services">Knowledge agents</a></li>
+          <li><a href="#services">M&A integration</a></li>
+          <li><a href="#services">FDE pods</a></li>
+          <li><a href="#services">Placement</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#operators">Join the network</a></li>
+          <li><a href="#manifesto">Thesis</a></li>
+          <li><a href="#">Notes</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@clus.ai">hello@clus.ai</a></li>
+          <li><a href="#">San Francisco</a></li>
+          <li><a href="#">Paris</a></li>
+          <li><a href="#">London</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 clus.ai · Built in SF & Paris</span>
+      <span>v.0.1 · Concept</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
