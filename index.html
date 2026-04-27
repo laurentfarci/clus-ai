@@ -757,15 +757,22 @@
     line-height: 1.5;
   }
 
-  .form-row {
-    max-width: 540px;
+  .form-brief {
+    max-width: 600px;
     margin: 0 auto;
     display: flex;
+    flex-direction: column;
     gap: 12px;
   }
 
-  .form-row input {
-    flex: 1;
+  .brief-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .form-brief input,
+  .form-brief textarea {
     background: transparent;
     border: 1px solid var(--rule);
     color: var(--paper);
@@ -775,17 +782,104 @@
     border-radius: 2px;
     outline: none;
     transition: border-color 0.2s;
+    width: 100%;
   }
 
-  .form-row input:focus {
+  .form-brief textarea {
+    resize: vertical;
+    min-height: 60px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .form-brief input:focus,
+  .form-brief textarea:focus {
     border-color: var(--accent);
   }
 
-  .form-row input::placeholder {
+  .form-brief input::placeholder,
+  .form-brief textarea::placeholder {
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-size: 11px;
+  }
+
+  .form-brief textarea::placeholder {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 13px;
+  }
+
+  .form-brief button {
+    align-self: center;
+    margin-top: 8px;
+    min-width: 280px;
+  }
+
+  /* Form states (shared) */
+  .form-error {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border: 1px solid #c44;
+    background: rgba(196, 68, 68, 0.08);
+    color: #ff8888;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 2px;
+    text-align: center;
+  }
+
+  .form-submitting .btn-label::after {
+    content: ' ...';
+  }
+
+  .form-submitting button {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* Centered success state for brief form */
+  .brief-success {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 48px 24px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    background: var(--ink-2);
+  }
+
+  .brief-success .success-mark {
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 24px;
+  }
+
+  .brief-success h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .brief-success p {
+    color: var(--paper-dim);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 380px;
+    margin: 0 auto;
   }
 
   .cta-fine {
@@ -1110,7 +1204,8 @@
     .footer-grid { grid-template-columns: 1fr; gap: 40px; }
     .footer-base { flex-direction: column; gap: 12px; }
 
-    .form-row { flex-direction: column; }
+    .form-brief button { min-width: 0; width: 100%; }
+    .brief-row { grid-template-columns: 1fr; }
 
     .who-block { padding: 32px 24px; }
 
@@ -1398,22 +1493,23 @@
       <div class="operators-form-wrap">
         <div class="operators-form">
           <div class="form-tag">→ Operator application</div>
-          <form onsubmit="event.preventDefault(); this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <form id="operator-form" action="https://formspree.io/f/xqewvqaz" method="POST">
+            <input type="hidden" name="_subject" value="New operator application — clus.ai" />
             <label>
               <span>Name</span>
-              <input type="text" required placeholder="First and last" />
+              <input type="text" name="name" required placeholder="First and last" />
             </label>
             <label>
               <span>Email</span>
-              <input type="email" required placeholder="you@domain.com" />
+              <input type="email" name="email" required placeholder="you@domain.com" />
             </label>
             <label>
               <span>LinkedIn or portfolio</span>
-              <input type="url" required placeholder="https://" />
+              <input type="url" name="linkedin" required placeholder="https://" />
             </label>
             <label>
               <span>Strongest domain</span>
-              <select required>
+              <select name="domain" required>
                 <option value="">Select one</option>
                 <option>Revenue & GTM systems</option>
                 <option>Knowledge & document agents</option>
@@ -1425,13 +1521,14 @@
             </label>
             <label>
               <span>One agent you have shipped to production</span>
-              <textarea required rows="3" placeholder="What it did, what stack, what scale. Two sentences."></textarea>
+              <textarea name="shipped_agent" required rows="3" placeholder="What it did, what stack, what scale. Two sentences."></textarea>
             </label>
             <button class="btn btn-primary" type="submit" style="width: 100%; justify-content: center;">
-              <span>Apply to the network</span>
+              <span class="btn-label">Apply to the network</span>
               <span class="arrow">→</span>
             </button>
             <div class="form-fine">By invitation. We review weekly. Reply within 7 days, yes or no.</div>
+            <div class="form-error" style="display:none;"></div>
           </form>
           <div class="form-success" style="display:none;">
             <div class="success-mark">✓</div>
@@ -1450,13 +1547,24 @@
     <div class="section-label" style="text-align: left; margin-bottom: 32px;"><span class="num">08 /</span>Start</div>
     <h2>The work is real.<br><em>So is the help.</em></h2>
     <p class="cta-deck">Tell us what you're trying to ship. A senior partner replies within 48 hours, no SDR, no sequence.</p>
-    <form class="form-row" onsubmit="event.preventDefault(); this.querySelector('input').value=''; this.nextElementSibling.textContent='Received. A partner will be in touch.';">
-      <input type="email" placeholder="work email" required />
+    <form class="form-brief" id="brief-form" action="https://formspree.io/f/xjgjqwvd" method="POST">
+      <input type="hidden" name="_subject" value="New brief request — clus.ai" />
+      <div class="brief-row">
+        <input type="email" name="email" placeholder="work email" required />
+        <input type="text" name="role" placeholder="role · company" required />
+      </div>
+      <textarea name="what_to_ship" placeholder="One sentence on what you're trying to ship." required rows="2"></textarea>
       <button class="btn btn-primary" type="submit">
-        <span>Request a brief</span>
+        <span class="btn-label">Request a brief</span>
         <span class="arrow">→</span>
       </button>
+      <div class="form-error" style="display:none;"></div>
     </form>
+    <div class="brief-success" id="brief-success" style="display:none;">
+      <div class="success-mark">✓</div>
+      <h4>Brief received.</h4>
+      <p>A senior partner will reply within 48 hours. No SDR, no sequence, just a real note.</p>
+    </div>
     <div class="cta-fine">No newsletter. No nurture. Just a reply.</div>
   </div>
 </section>
@@ -1504,6 +1612,74 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Generic Formspree AJAX handler
+  function wireForm(formId, onSuccess) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+
+    // Don't wire if endpoint hasn't been set
+    if (form.action.indexOf('YOUR_') !== -1) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showError(form, 'Form not yet configured. Set the Formspree endpoint in the HTML.');
+      });
+      return;
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const errorEl = form.querySelector('.form-error');
+      if (errorEl) { errorEl.style.display = 'none'; errorEl.textContent = ''; }
+      form.classList.add('form-submitting');
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          form.classList.remove('form-submitting');
+          onSuccess(form);
+        } else {
+          const data = await response.json().catch(() => ({}));
+          const msg = (data.errors && data.errors[0] && data.errors[0].message)
+            || 'Something went wrong. Try again or email hello@clus.ai.';
+          showError(form, msg);
+          form.classList.remove('form-submitting');
+        }
+      } catch (err) {
+        showError(form, 'Network error. Try again or email hello@clus.ai.');
+        form.classList.remove('form-submitting');
+      }
+    });
+  }
+
+  function showError(form, message) {
+    const errorEl = form.querySelector('.form-error');
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+    }
+  }
+
+  // Operator form: hide form, show inline success block (already in DOM)
+  wireForm('operator-form', function(form) {
+    form.style.display = 'none';
+    const success = form.parentElement.querySelector('.form-success');
+    if (success) success.style.display = 'block';
+  });
+
+  // Brief form: hide form, show centered success block
+  wireForm('brief-form', function(form) {
+    form.style.display = 'none';
+    document.getElementById('brief-success').style.display = 'block';
+  });
+</script>
 
 </body>
 </html>
