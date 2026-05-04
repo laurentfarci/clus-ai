@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The governance gap — clus.ai</title>
+<meta name="description" content="71% of enterprises deploying AI agents have no formal governance framework. 64% plan to expand agent autonomy within twelve months. A working framework for closing the gap before your CISO does.">
+
+<link rel="canonical" href="https://clus.ai/notes/governance-gap/">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://clus.ai/notes/governance-gap/">
+<meta property="og:title" content="The governance gap — clus.ai">
+<meta property="og:description" content="A working framework for AI agent governance, before your CISO writes one for you.">
+<meta property="og:image" content="https://clus.ai/assets/og.png">
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The governance gap",
+  "description": "Why 71% of enterprises deploying agents have no governance framework, and a working framework you can use this week.",
+  "author": { "@type": "Organization", "name": "clus.ai" },
+  "publisher": { "@type": "Organization", "name": "clus.ai" },
+  "datePublished": "2026-05-03",
+  "url": "https://clus.ai/notes/governance-gap/"
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell site-header__inner">
+    <a href="/" class="logo">clus<span class="dot">.ai</span></a>
+    <nav class="nav">
+      <a href="/practice/" class="nav__link">Practice</a>
+      <a href="/approach/" class="nav__link">Approach</a>
+      <a href="/network/" class="nav__link">Network</a>
+      <a href="/about/" class="nav__link">About</a>
+      <a href="/notes/" class="nav__link">Notes</a>
+      <a href="/#contact" class="nav__cta">Request a brief →</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <article>
+
+    <header class="article-head">
+      <div class="shell">
+        <div class="meta-row">
+          <span><a href="/notes/" style="color:var(--stone); border-bottom: 1px solid var(--rule-strong);">Notes</a></span>
+          <span class="topic">01 · AI governance</span>
+          <span>11 min read</span>
+        </div>
+        <h1>The governance <em>gap</em>.</h1>
+        <p class="dek">Forrester says 71% of enterprises deploying AI agents have no governance framework. 64% plan to expand agent autonomy in the next twelve months. The math is bad. Here's a working framework, and the four questions to answer before your CISO writes one for you.</p>
+      </div>
+    </header>
+
+    <section class="article-body">
+      <div class="shell">
+        <div class="prose">
+
+          <p>Two numbers from a Forrester survey of 500 enterprises deploying AI agents tell the entire story of where the market is right now: 71% lack a formal governance framework for autonomous agents, and 64% of those same organizations plan to increase agent autonomy within twelve months.<sup><a href="#fn1">1</a></sup> Read those two numbers next to each other and the implication is hard to miss. Most enterprises are not just deploying agents without governance. They're planning to give those ungoverned agents more authority over the next year.</p>
+
+          <p>This is happening for a reason that's easy to be sympathetic to. Agent governance is a moving target. The EU AI Act becomes fully enforceable in August 2026, with penalties up to EUR 35 million for high-risk system non-compliance.<sup><a href="#fn1">1</a></sup> ISO/IEC 42001 is the new management-system standard, but it's broad. NIST AI RMF is American, voluntary, and doesn't have the operational specificity teams need on a Tuesday afternoon. Internal audit isn't sure what to ask for. Procurement is signing vendor contracts without anyone reading the model-output indemnification clauses. The CISO knows something is off but the AI strategy didn't come through her org.</p>
+
+          <p>Meanwhile the engineering team has shipped three agents into production this quarter and is being asked to ship six more.</p>
+
+          <div class="stat-row">
+            <div class="stat-row__item">
+              <span class="num">71%</span>
+              <span class="label">of enterprises deploying agents have no formal governance framework</span>
+            </div>
+            <div class="stat-row__item">
+              <span class="num">64%</span>
+              <span class="label">plan to expand agent autonomy in the next twelve months</span>
+            </div>
+            <div class="stat-row__item">
+              <span class="num">3.4×</span>
+              <span class="label">more likely to achieve high effectiveness with a dedicated governance platform, per Gartner</span>
+            </div>
+          </div>
+
+          <h2>What "agent governance" actually means</h2>
+
+          <p>Traditional AI governance asked questions like: was the model trained on permissioned data, can we explain its predictions, does it produce biased outputs. Those questions are still relevant but they're not sufficient. Agents act. They write to systems, send messages, move money, change records, and chain calls together in ways their designers didn't always anticipate. Governance for an agent is the set of controls that answer four operational questions:</p>
+
+          <ol>
+            <li><strong>What is this agent authorized to do?</strong> The action surface area, written down, with an explicit list of what's in and out of scope.</li>
+            <li><strong>What must it never do?</strong> The hard guardrails. Not just policy in a doc, but enforced at runtime.</li>
+            <li><strong>How are its decisions logged?</strong> The audit trail. Every input, every tool call, every output, with a time stamp and a session ID.</li>
+            <li><strong>Who is accountable when it goes wrong?</strong> Not "the AI made a mistake." A specific human, with a specific role, who has the authority to pull the agent offline.</li>
+          </ol>
+
+          <p>If you can't answer those four questions for an agent that's running in production, you don't have a governance framework. You have an exposure.</p>
+
+          <h2>The four traps</h2>
+
+          <h3>1. Treating governance as a launch-stage activity</h3>
+
+          <p>The most common pattern we see: an enterprise stands up a cross-functional council to "define AI governance," produces a sixty-slide document, blesses one or two flagship deployments, and then everyone goes back to their day jobs. Six months later there are seventeen agents in production. None of them went through the council. The team that built them didn't know about the framework, or knew about it and didn't have time to apply it, or couldn't tell which of the policies in the document actually applied to their use case.</p>
+
+          <p>Governance is not a launch artifact. It's an operational practice. The teams that get this right run governance reviews on a cadence that matches the deployment cadence, not the planning cadence. If you ship an agent every two weeks, you review every two weeks.</p>
+
+          <h3>2. Confusing governance with security</h3>
+
+          <p>Security teams have agent-relevant skills, but agent governance is bigger than the AppSec checklist. A SOC 2 audit is not an agent governance review. A pen test on the underlying API is not an agent governance review. The questions that govern agent behavior, what it's allowed to do, when it should escalate, what data flows through it, how it learns from feedback, are mostly not security questions. They're business-process questions answered by the people who own the workflow the agent is automating.</p>
+
+          <p>A good governance framework explicitly assigns these questions to the workflow owner, not the security team. The security team owns the controls that enforce the answers. That distinction matters because it tells the workflow owner they can't outsource governance, and it tells the security team they don't have to invent business policy.</p>
+
+          <h3>3. Governing the model, not the action</h3>
+
+          <p>Most early enterprise AI policies were written for the era of pre-trained models being used for analysis and content generation. They focused on training data, hallucination rates, output bias. Those concerns are still relevant. But agents do something models alone don't do: they take actions in the world. The governance frame has to shift from "is the model's output acceptable" to "is the agent's action acceptable, given the state of the world it acted on, the authority it had, and the human who can review the trail."</p>
+
+          <p>The simplest test: if you removed the language model from your agent and left only the action layer, would your governance framework still describe what the agent is allowed to do? If yes, you're governing the action. If no, you're governing the model.</p>
+
+          <h3>4. Vendor-defined autonomy</h3>
+
+          <p>Platform vendors define their own boundaries. Salesforce Agentforce has a permission model. Microsoft Copilot has a permission model. ServiceNow AI has one too. Each is internally coherent, none of them speak to each other, and none of them map cleanly onto your enterprise's existing role-based access control. If you let each platform define what its agent is allowed to do inside its own walls, you've effectively delegated your authorization model to your vendors. You can reverse this, but only by writing the cross-platform authority model yourself.</p>
+
+          <blockquote>The choice of foundation model vendor and the choice of agent framework are not independent decisions. If agents run on a vendor's proprietary orchestration layer, lock-in compounds at every layer of the stack.</blockquote>
+
+          <p>That's a structural argument for keeping your authorization model and your audit trail at a layer above any single vendor's platform. It also happens to be a structural argument for working with implementation partners who are platform-agnostic, but you'd expect us to say that.</p>
+
+          <h2>A working framework: the five-pillar model</h2>
+
+          <p>The framework below is a synthesis of what's emerged in production-grade enterprise deployments through the first quarter of 2026. It's deliberately not aspirational. Every pillar maps to controls a team can stand up in weeks, not quarters.</p>
+
+          <div class="callout">
+            <span class="label">Pillar 1 · Authorization</span>
+            <p><strong>Every agent in production has a written authorization scope.</strong> What systems it can read from, what systems it can write to, what actions it can initiate, and the authority limit in dollars or in records. The scope is reviewed by the workflow owner and the security team before the agent ships, and re-reviewed every 90 days or whenever the scope changes.</p>
+          </div>
+
+          <div class="callout">
+            <span class="label">Pillar 2 · Hard guardrails</span>
+            <p><strong>The actions the agent must never take, enforced at runtime, not in policy.</strong> Common examples: no writes to financial systems above $X without human approval, no external messages to net-new contacts, no PII outbound to systems not on the approved list. Guardrails live in code, not in a wiki. They have tests. The tests run on every deployment.</p>
+          </div>
+
+          <div class="callout">
+            <span class="label">Pillar 3 · Observability</span>
+            <p><strong>Full session traces, structured logs, and a metric layer that surfaces drift.</strong> Every input, every tool call, every output, with session ID, agent version, model version, and timestamp. The bar isn't "we could reconstruct what happened if we had to." The bar is "the team that owns this agent reviews aggregate behavior weekly and a sample of individual sessions monthly." If the data exists but nobody looks at it, you don't have observability. You have liability.</p>
+          </div>
+
+          <div class="callout">
+            <span class="label">Pillar 4 · Human-in-the-loop</span>
+            <p><strong>Defined escalation paths, with thresholds the workflow owner sets.</strong> Not "AI handles everything until something goes wrong." Specific triggers (action exceeds authority limit, confidence below threshold, customer asks for a human, agent encounters a scenario outside its scope) that route to a specific person or queue with a specific SLA. Escalation is part of the agent design, not an exception path.</p>
+          </div>
+
+          <div class="callout">
+            <span class="label">Pillar 5 · Accountability</span>
+            <p><strong>Every agent has a named human owner.</strong> Not the team that built it. A specific person, with the authority to pull it offline, who is on the hook if it does something it shouldn't. This person reviews the weekly metrics and signs off on the quarterly authorization-scope review. When the agent breaks something, this is the person who explains what happened.</p>
+          </div>
+
+          <h2>What gets you in trouble fastest</h2>
+
+          <p>If we had to pick one thing for an enterprise to do this quarter, it's pillar 5. Most governance failures we see in the field are not technical. They're accountability failures. An agent does something it shouldn't, and there's no single person whose job description includes "this agent." The team that built it has moved to the next project. The vendor says it's working as designed. The workflow owner says they didn't know what the agent was doing day to day. The CISO finds out in a postmortem.</p>
+
+          <p>This is solvable in an afternoon. Take the list of agents currently in production. Assign each one a named human owner with the authority to pull it offline. Send each owner a one-page summary of what their agent does, what it's authorized to do, and how it's being monitored. Tell them they're accountable. That single change, made well before any of the more technical pillars are in place, materially reduces enterprise risk.</p>
+
+          <h2>Where the EU AI Act actually bites</h2>
+
+          <p>The Act classifies AI systems by risk level and imposes proportionate requirements. Most enterprise agent deployments fall into "limited risk" or "high-risk" categories.<sup><a href="#fn1">1</a></sup> Limited-risk agents, which include most customer service chatbots and content generators, must disclose their AI nature to users and maintain basic documentation. High-risk agents, which include financial decision-making, HR screening, healthcare support, and similar workflows, face the full set: conformity assessments, human oversight mechanisms, complete audit trails, technical documentation, and ongoing monitoring.</p>
+
+          <p>The Act becomes fully enforceable in August 2026. If your agents are in scope and your governance framework isn't, the question isn't whether you'll need to remediate. It's whether you'll do it on your timeline or on a regulator's.</p>
+
+          <h2>Closing thought</h2>
+
+          <p>The governance gap closes one of two ways. The first is structured: the workflow owner, the security team, and an outside partner who has done this before sit down and answer the four questions, then the five pillars, then write the policy document last because by then they know what to write. The second is unstructured: an agent does something it shouldn't, the postmortem reveals the gap, and the framework gets written in retrospect with the regulator on the call.</p>
+
+          <p>Both work. The first is significantly cheaper.</p>
+
+          <div class="footnotes" id="fn">
+            <h3>Sources</h3>
+            <ol>
+              <li id="fn1">Forrester 2026 enterprise AI agent survey, 500 organizations. Cited in <a href="https://thinking.inc/en/blue-ocean/agentic/enterprise-agent-governance/" target="_blank" rel="noopener">The Thinking Company, March 2026</a>.</li>
+              <li>Gartner research on AI governance platforms, February 2026. Cited in <a href="https://cognipeer.com/ai-agent-governance/" target="_blank" rel="noopener">cognipeer, April 2026</a>.</li>
+              <li>EU AI Act enforcement timeline and penalties. <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noopener">European Commission, AI Act overview</a>.</li>
+              <li>ISO/IEC 42001 management system framework for AI. Discussed in <a href="https://www.ewsolutions.com/agentic-ai-governance/" target="_blank" rel="noopener">EWSolutions, March 2026</a>.</li>
+              <li>Vendor lock-in and platform-agnostic governance posture. <a href="https://www.kai-waehner.de/blog/2026/04/06/enterprise-agentic-ai-landscape-2026-trust-flexibility-and-vendor-lock-in/" target="_blank" rel="noopener">Kai Waehner, April 2026</a>.</li>
+            </ol>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <nav class="article-nav">
+      <div class="shell">
+        <div class="article-nav__grid">
+          <a href="/notes/">
+            <span class="label">← All notes</span>
+            <span class="title">Field notes</span>
+          </a>
+          <a href="/notes/non-deterministic-creative/" class="next">
+            <span class="label">Next →</span>
+            <span class="title">Why non-deterministic agents belong in creative work</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+  </article>
+
+  <section class="contact-band">
+    <div class="shell contact-band__grid">
+      <h2>Have a workflow worth automating?</h2>
+      <div>
+        <p class="caps caps-signal" style="margin-bottom:0.75rem;">Reply within 48 hours</p>
+        <p style="margin-bottom: 1.5rem;">Tell us what you're trying to ship. A senior partner replies within 48 hours.</p>
+        <a href="/#contact" class="btn btn--primary">
+          Request a brief <span class="arrow">→</span>
+        </a>
+        <p style="margin-top:1.5rem; color:var(--stone); font-size:0.875rem;">San Francisco · New York · London · Paris</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="site-footer__grid">
+      <div>
+        <div class="logo" style="margin-bottom:1rem;">clus<span class="dot">.ai</span></div>
+        <p class="small" style="max-width:36ch;">A network firm for the agent era. Built by operators, for operators.</p>
+      </div>
+      <div>
+        <h4>Firm</h4>
+        <ul>
+          <li><a href="/practice/">Practice</a></li>
+          <li><a href="/approach/">Approach</a></li>
+          <li><a href="/network/">Network</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/notes/">Notes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Briefs</h4>
+        <ul>
+          <li><a href="/#contact">Request a brief</a></li>
+          <li><a href="/network/#apply">Apply to the network</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@clus.ai">hello@clus.ai</a></li>
+          <li class="small" style="color:var(--stone);">SF · NY · LDN · PAR</li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__base">
+      <span class="network-badge">
+        <span class="pulse"></span>
+        Network forming · in proof of concept
+      </span>
+      <span>© 2026 clus.ai · v.0.3</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

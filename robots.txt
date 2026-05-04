@@ -23,5 +23,14 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
 # Site map and AI summary
 Sitemap: https://clus.ai/sitemap.xml

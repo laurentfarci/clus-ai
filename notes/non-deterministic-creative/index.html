@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Why non-deterministic agents belong in creative work — clus.ai</title>
+<meta name="description" content="Most enterprise teams turn the temperature dial down to zero. For deterministic work, that's right. For creative work, it's the same mistake as hiring an exhausted copy editor to run your brainstorm. Here's when and how to crank it back up.">
+
+<link rel="canonical" href="https://clus.ai/notes/non-deterministic-creative/">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://clus.ai/notes/non-deterministic-creative/">
+<meta property="og:title" content="Why non-deterministic agents belong in creative work">
+<meta property="og:description" content="A practical guide to using stochasticity, sampling, and divergence as a feature, not a bug.">
+<meta property="og:image" content="https://clus.ai/assets/og.png">
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Why non-deterministic agents belong in creative work",
+  "description": "A practical guide to using stochasticity, sampling, and divergence as a feature, not a bug.",
+  "author": { "@type": "Organization", "name": "clus.ai" },
+  "publisher": { "@type": "Organization", "name": "clus.ai" },
+  "datePublished": "2026-05-03",
+  "url": "https://clus.ai/notes/non-deterministic-creative/"
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell site-header__inner">
+    <a href="/" class="logo">clus<span class="dot">.ai</span></a>
+    <nav class="nav">
+      <a href="/practice/" class="nav__link">Practice</a>
+      <a href="/approach/" class="nav__link">Approach</a>
+      <a href="/network/" class="nav__link">Network</a>
+      <a href="/about/" class="nav__link">About</a>
+      <a href="/notes/" class="nav__link">Notes</a>
+      <a href="/#contact" class="nav__cta">Request a brief →</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <article>
+
+    <header class="article-head">
+      <div class="shell">
+        <div class="meta-row">
+          <span><a href="/notes/" style="color:var(--stone); border-bottom: 1px solid var(--rule-strong);">Notes</a></span>
+          <span class="topic">02 · Agent design</span>
+          <span>10 min read</span>
+        </div>
+        <h1>Why <em>non-deterministic</em> agents belong in creative work.</h1>
+        <p class="dek">Most enterprise teams are turning the temperature dial down to zero, treating randomness like a defect. For deterministic work, that's right. For creative work, it's the same mistake as hiring an exhausted copy editor to run your brainstorm. Here's when to crank it back up and how.</p>
+      </div>
+    </header>
+
+    <section class="article-body">
+      <div class="shell">
+        <div class="prose">
+
+          <p>There's a quiet consensus forming inside enterprise AI teams that goes something like this: language models are unreliable, the way to make them reliable is to lock down the parameters, and the path to enterprise-grade output runs through temperature 0, low top-p, and a forty-page prompt. This is correct exactly as far as it goes. For deterministic tasks, code generation, structured data extraction, regulated text, you want the model to pick the highest-probability token every time and never surprise you. The bug is treating this as the universal stance.</p>
+
+          <p>For creative work, it's the wrong stance. And "creative work" inside an enterprise is broader than people realize. It includes campaign concepting, product naming, customer-facing copy variations, design exploration, hypothesis generation in research, even the framing of strategy memos. Anywhere the right answer isn't a known answer but a discovered one, the property you want from the agent is exactly the property the deterministic posture engineers out: the willingness to suggest something the team wouldn't have suggested on its own.</p>
+
+          <h2>What temperature actually controls</h2>
+
+          <p>A language model doesn't pick "the next word." It produces a probability distribution over thousands of possible next tokens, and a sampling method picks one. Temperature is the parameter that reshapes that distribution before sampling. At temperature 0, the model picks whichever token has the highest probability, every time, deterministically.<sup><a href="#fn1">1</a></sup> At temperature 1, it samples from the distribution as the model produced it. Above 1, it flattens the distribution, giving lower-probability tokens a better shot. Above about 1.5, the distribution is flat enough that the output starts to lose coherence. The interesting range for creative work is roughly 0.9 to 1.3.<sup><a href="#fn2">2</a></sup></p>
+
+          <p>The mechanical effect: at low temperature the model produces text that looks like the average of similar training examples. At higher temperature, it produces text that combines training examples in less typical ways. For factual or structural tasks the average is what you want. For creative tasks the less typical combinations are exactly the point.</p>
+
+          <div class="stat-row">
+            <div class="stat-row__item">
+              <span class="num">0 – 0.3</span>
+              <span class="label">Deterministic. Code, extraction, factual answers, regulated content.</span>
+            </div>
+            <div class="stat-row__item">
+              <span class="num">0.7 – 1.0</span>
+              <span class="label">Default. Most assistant work, conversational, summary tasks.</span>
+            </div>
+            <div class="stat-row__item">
+              <span class="num">1.0 – 1.3</span>
+              <span class="label">Divergent. Brainstorming, naming, copy variation, conceptual exploration.</span>
+            </div>
+          </div>
+
+          <h2>The brainstorm analogy</h2>
+
+          <p>Think about the actual cognitive job of a brainstorm. You're trying to surface options the group wouldn't otherwise consider, to get past the obvious and the safe, to make weird connections that turn out to be useful. The worst person to invite to a brainstorm is the most senior expert in the room, because their high prior probability on the "correct" answer crowds out the lower-probability candidates that might actually be more interesting. Good facilitators know this. They explicitly invite outsiders. They run rounds where bad ideas are mandatory. They use prompts like "what would the worst possible solution look like" to flatten the team's distribution over what's allowed.</p>
+
+          <p>That last move, deliberately flattening the distribution, is exactly what raising the temperature does to a language model. It's not a bug. It's the thing you wanted.</p>
+
+          <blockquote>The same model can do both. But only if you know which mode you're asking for.</blockquote>
+
+          <p>The teams getting this wrong are the ones running their brainstorm prompts at temperature 0.2 because that's what worked for their data extraction agent, and then concluding that the model "can't do creative work." It can. They're asking for the boring answer.</p>
+
+          <h2>What the research actually shows</h2>
+
+          <p>The literature on AI in creative work has a wrinkle that's worth knowing about. AI accelerates the divergent phase, when you want many ideas, but it can hurt convergence, when you want to pick a good one. A 2025 study comparing AI-assisted to human-only design teams found that AI-assisted teams generated more ideas faster, but also encouraged what the researchers called "premature convergence," narrowing exploration early and producing less functionally refined solutions.<sup><a href="#fn3">3</a></sup> Human-only teams iterated more and produced higher-quality final designs.</p>
+
+          <p>The lesson isn't "don't use AI for creative work." It's "use AI for the part it's good at, and don't let it run the part it's bad at." For divergence, fluency, and breadth: high temperature, AI in the loop, generate aggressively. For convergence, evaluation, and craft: low temperature or no AI at all, and let humans pick. The teams winning at this have separated those two modes deliberately. The teams losing at it are using a single agent at a single temperature for both.</p>
+
+          <h2>A working pattern: the wake/dream/judge architecture</h2>
+
+          <p>A research framework called ReMIND, published earlier this year, formalizes this separation in a way that's actually useful for production teams.<sup><a href="#fn4">4</a></sup> The architecture breaks creative ideation into three roles, each implemented as a separate agent or a separate model call:</p>
+
+          <div class="callout">
+            <span class="label">Wake</span>
+            <p><strong>Low-temperature baseline.</strong> Produces the safe, expected, on-brand answer. This is the "if we did this in the obvious way, here's what we'd ship" output. It anchors the rest of the process and gives the team a reference point.</p>
+          </div>
+
+          <div class="callout">
+            <span class="label">Dream</span>
+            <p><strong>High-temperature divergence.</strong> Produces unconventional combinations that explicitly depart from the wake baseline. Cranked-up temperature, possibly with techniques like prompt-level constraint relaxation. Most of the dream output will be unusable. The point isn't usability, it's discovery.</p>
+          </div>
+
+          <div class="callout">
+            <span class="label">Judge</span>
+            <p><strong>Low-temperature evaluation.</strong> Reads both the wake baseline and the dream variations and identifies which dream outputs are interestingly different from baseline in ways that meet the brief. The judge isn't picking the winner, it's filtering the long tail down to a shortlist for a human to pick from.</p>
+          </div>
+
+          <p>The architecture matters because it stops a single agent from trying to do incompatible jobs. A single agent at temperature 0.7 produces work that's neither safely on-brand nor usefully weird. It's mush. Three agents at three different settings produce a baseline, a set of departures, and a defensible shortlist.</p>
+
+          <h2>Where this changes how you build</h2>
+
+          <p>If you're deploying agents into a workflow that includes creative judgment, the implementation note here is that you almost certainly want more than one agent, with more than one configuration, orchestrated. Concretely:</p>
+
+          <ul>
+            <li><strong>Naming and copy variation:</strong> 5 to 10 candidates at temperature 1.1, deduplicated and ranked by a low-temperature judge, surfaced to a human as a shortlist of 3 with rationale for each.</li>
+            <li><strong>Campaign concepting:</strong> a wake agent producing the on-brand baseline, a dream agent producing departures along axes the brief specifies (more emotional, more technical, more contrarian), a judge agent doing the filtering.</li>
+            <li><strong>Research hypothesis generation:</strong> high temperature for the hypothesis, low temperature for the literature search and the falsifiability check.</li>
+            <li><strong>Strategy memo framing:</strong> wake for the standard frame, dream for three contrarian frames, human picks which to develop.</li>
+          </ul>
+
+          <p>None of this is exotic. It's just deliberate use of the parameter that's already there.</p>
+
+          <h2>The governance footnote</h2>
+
+          <p>If you read <a href="/notes/governance-gap/" style="color:var(--signal); border-bottom: 1px solid var(--rule-strong);">the governance piece</a>, you'll have noticed a tension. Higher-temperature agents are by definition less predictable, which makes them harder to govern. The resolution is straightforward: high-temperature agents should not have authority to act. They generate options. A human, or a low-temperature judge that a human reviews, picks. The governance posture becomes "the creative agent has zero action authority and produces only candidate outputs that a separate review step turns into actions." That's a defensible posture for any auditor. It's also the architecture that produces the best creative output anyway, so this is one of the rare cases where the safe answer and the right answer are the same.</p>
+
+          <h2>What to take from this</h2>
+
+          <p>If your team is shipping agents and the default temperature is 0 or 0.2 across the board, you're optimizing for one half of the work. The other half, the half that involves discovery and unexpected connections, is being left on the table. The fix isn't to raise the temperature on your customer-service agent. It's to recognize that "deploying agents" is plural, and the right configuration depends on whether you're asking the agent to be reliable or to be interesting.</p>
+
+          <p>Pick which one each agent is for. Set the parameters accordingly. And separate the divergent and convergent phases architecturally, so a single agent isn't trying to do both jobs and failing at both.</p>
+
+          <div class="footnotes">
+            <h3>Sources</h3>
+            <ol>
+              <li id="fn1">Temperature parameter mechanics and probability distribution shaping. <a href="https://watercrawl.dev/blog/What-Is-Temperature-in-AI-Models" target="_blank" rel="noopener">WaterCrawl, October 2025</a>.</li>
+              <li id="fn2">Practical temperature ranges for creative versus deterministic work. <a href="https://fieldguidetoai.com/guides/temperature-sampling" target="_blank" rel="noopener">Field Guide to AI, February 2026</a>.</li>
+              <li id="fn3">AI-assisted vs human-only creative teams in design tasks. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12864478/" target="_blank" rel="noopener">PMC, AI-assisted design synthesis study</a>.</li>
+              <li id="fn4">ReMIND framework for separating exploration, evaluation, and consolidation across multiple LLM instances. <a href="https://arxiv.org/pdf/2601.07121" target="_blank" rel="noopener">Arxiv preprint, 2026</a>.</li>
+              <li>Top-p, top-k, and temperature interactions for output control. <a href="https://codefinity.com/blog/Understanding-Temperature,-Top-k,-and-Top-p-Sampling-in-Generative-Models" target="_blank" rel="noopener">Codefinity, generative model sampling guide</a>.</li>
+            </ol>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <nav class="article-nav">
+      <div class="shell">
+        <div class="article-nav__grid">
+          <a href="/notes/governance-gap/">
+            <span class="label">← Previous</span>
+            <span class="title">The governance gap</span>
+          </a>
+          <a href="/notes/buy-build-borrow/" class="next">
+            <span class="label">Next →</span>
+            <span class="title">Buy, build, or borrow</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+  </article>
+
+  <section class="contact-band">
+    <div class="shell contact-band__grid">
+      <h2>Have a workflow worth automating?</h2>
+      <div>
+        <p class="caps caps-signal" style="margin-bottom:0.75rem;">Reply within 48 hours</p>
+        <p style="margin-bottom: 1.5rem;">Tell us what you're trying to ship. A senior partner replies within 48 hours.</p>
+        <a href="/#contact" class="btn btn--primary">
+          Request a brief <span class="arrow">→</span>
+        </a>
+        <p style="margin-top:1.5rem; color:var(--stone); font-size:0.875rem;">San Francisco · New York · London · Paris</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="site-footer__grid">
+      <div>
+        <div class="logo" style="margin-bottom:1rem;">clus<span class="dot">.ai</span></div>
+        <p class="small" style="max-width:36ch;">A network firm for the agent era. Built by operators, for operators.</p>
+      </div>
+      <div>
+        <h4>Firm</h4>
+        <ul>
+          <li><a href="/practice/">Practice</a></li>
+          <li><a href="/approach/">Approach</a></li>
+          <li><a href="/network/">Network</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/notes/">Notes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Briefs</h4>
+        <ul>
+          <li><a href="/#contact">Request a brief</a></li>
+          <li><a href="/network/#apply">Apply to the network</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@clus.ai">hello@clus.ai</a></li>
+          <li class="small" style="color:var(--stone);">SF · NY · LDN · PAR</li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__base">
+      <span class="network-badge">
+        <span class="pulse"></span>
+        Network forming · in proof of concept
+      </span>
+      <span>© 2026 clus.ai · v.0.3</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

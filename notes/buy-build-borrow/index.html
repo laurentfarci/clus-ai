@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Buy, build, or borrow — clus.ai</title>
+<meta name="description" content="Gartner says 40% of agentic AI projects will be cancelled by end of 2027. Forrester says 75% of enterprises trying to build will fail. The buy-vs-build framing is broken. Here's a working three-way framework.">
+
+<link rel="canonical" href="https://clus.ai/notes/buy-build-borrow/">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://clus.ai/notes/buy-build-borrow/">
+<meta property="og:title" content="Buy, build, or borrow — clus.ai">
+<meta property="og:description" content="A 2026 framework for deciding what stays in-house, what doesn't, and what to do with the seam.">
+<meta property="og:image" content="https://clus.ai/assets/og.png">
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Buy, build, or borrow",
+  "description": "A 2026 framework for deciding where to put your agent capability.",
+  "author": { "@type": "Organization", "name": "clus.ai" },
+  "publisher": { "@type": "Organization", "name": "clus.ai" },
+  "datePublished": "2026-05-03",
+  "url": "https://clus.ai/notes/buy-build-borrow/"
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell site-header__inner">
+    <a href="/" class="logo">clus<span class="dot">.ai</span></a>
+    <nav class="nav">
+      <a href="/practice/" class="nav__link">Practice</a>
+      <a href="/approach/" class="nav__link">Approach</a>
+      <a href="/network/" class="nav__link">Network</a>
+      <a href="/about/" class="nav__link">About</a>
+      <a href="/notes/" class="nav__link">Notes</a>
+      <a href="/#contact" class="nav__cta">Request a brief →</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <article>
+
+    <header class="article-head">
+      <div class="shell">
+        <div class="meta-row">
+          <span><a href="/notes/" style="color:var(--stone); border-bottom: 1px solid var(--rule-strong);">Notes</a></span>
+          <span class="topic">03 · Decision framework</span>
+          <span>13 min read</span>
+        </div>
+        <h1>Buy, build, or <em>borrow</em>.</h1>
+        <p class="dek">Gartner says 40% of agentic AI projects will be cancelled by the end of 2027. Forrester says 75% of enterprises trying to build their own agentic systems will fail. The buy-versus-build framing has produced both numbers. There's a third option most leaders haven't priced. Here's how to decide what stays in-house, what doesn't, and what to do with the seam.</p>
+      </div>
+    </header>
+
+    <section class="article-body">
+      <div class="shell">
+        <div class="prose">
+
+          <p>Three numbers from analyst firms in the first quarter of 2026 frame the decision your CIO is currently making. Gartner: more than 40% of agentic AI projects will be cancelled by the end of 2027.<sup><a href="#fn1">1</a></sup> Forrester: 75% of companies attempting to build their own agentic systems will fail.<sup><a href="#fn2">2</a></sup> Anthropic, in their 2026 State of AI Agents report: 47% of enterprises are already running a hybrid of off-the-shelf and custom-built agents, but almost none arrived there deliberately.<sup><a href="#fn3">3</a></sup></p>
+
+          <p>The buy-versus-build debate is producing those failure rates because it's the wrong frame. It treats the decision as binary, evaluates each agent in isolation, and ignores the largest source of failure: the seam between what you bought and what you built. That's where governance debt accumulates, where shadow AI spend hides, and where the vendor's customization ceiling sneaks up on you twelve months after the contract is irreversible.</p>
+
+          <p>The frame that produces better outcomes is three-way: buy, build, or borrow. Borrowing, in this context, means renting senior capacity to ship a specific outcome, in production, with knowledge transfer to your team. It's the option most enterprises haven't sized correctly because it doesn't fit either of the procurement playbooks (software or staff aug) that they're used to running.</p>
+
+          <div class="stat-row">
+            <div class="stat-row__item">
+              <span class="num">40%+</span>
+              <span class="label">of agentic AI projects projected to be cancelled by 2027 (Gartner)</span>
+            </div>
+            <div class="stat-row__item">
+              <span class="num">75%</span>
+              <span class="label">of enterprises building their own agentic systems projected to fail (Forrester)</span>
+            </div>
+            <div class="stat-row__item">
+              <span class="num">47%</span>
+              <span class="label">of enterprises already running hybrid, mostly by accident (Anthropic)</span>
+            </div>
+          </div>
+
+          <h2>The three options, honestly</h2>
+
+          <h3>Buy</h3>
+
+          <p>You purchase a platform-native agent or a vendor-built agent for a specific workflow. Salesforce Agentforce. Microsoft Copilot. ServiceNow AI. Decagon for support, Sierra for customer service, Ada for the same. The agent comes pre-trained, pre-integrated to its native platform, and shipped on a contract.</p>
+
+          <p>Strengths: time to deployment is the shortest of the three options, typically four to eight weeks. The vendor absorbs the infrastructure complexity, the model maintenance, the regulatory updates. For commodity workflows where your enterprise isn't particularly different from anyone else's, this is usually the right call.</p>
+
+          <p>Failure modes: vendor lock-in compounds at every layer. Customization ceilings show up late. The platform's permission model becomes your authorization model by default. And per-ticket or per-seat pricing on agents that are genuinely doing work scales unpleasantly when the volume is high.</p>
+
+          <h3>Build</h3>
+
+          <p>Your engineering team writes the agent in-house, on top of foundation models and orchestration frameworks like LangGraph, CrewAI, or the OpenAI Agents SDK. Full control over architecture, data handling, and behavior.</p>
+
+          <p>Strengths: maximum customization. The agent fits your workflow exactly, including the edge cases that no vendor is going to support. If the agent is core to your differentiation, this is the only option that doesn't externalize your IP.</p>
+
+          <p>Failure modes: this is where the 75% number comes from. Building production-grade agents requires a stack of capabilities most enterprise engineering teams don't have in steady-state: prompt engineers who understand evaluation and regression testing, ML platform engineers who can build and operate inference infrastructure, and reliability engineers experienced in non-deterministic failure modes. Time to production runs 6 to 18 months. Total cost of ownership over three years runs $680K to $1.59M for a single agent in the public benchmarks, with 65% of total cost arriving after initial deployment.<sup><a href="#fn4">4</a></sup> The infrastructure also keeps shifting. What you build on this quarter will likely need rearchitecting within twelve months as the framework ecosystem keeps churning.</p>
+
+          <h3>Borrow</h3>
+
+          <p>You hire a senior team for a fixed scope to ship a specific agent into production, with knowledge transfer to your team baked into the engagement. Not staff augmentation (you're not renting bodies, you're renting an outcome). Not a Big 4 transformation engagement (you're not paying for a six-month strategy phase). The borrow option, done well, is a 10 to 80 day engagement that ends with an agent in production and your team trained to run it.</p>
+
+          <p>Strengths: time to production is shorter than build (because the senior team has done this before), customization is higher than buy (because you own the IP at the end), and total cost is meaningfully lower than build because you're not absorbing the long tail of maintenance during the steep part of the learning curve. The third number, learning, is the one most enterprises don't price correctly. Borrowing brings in operators who have shipped this exact pattern before, which means your team learns by doing alongside someone who's already made the mistakes.</p>
+
+          <p>Failure modes: the borrow option produces bad outcomes when the engagement isn't outcome-tied (you end up paying for time, not work shipped), when there's no senior accountability (you end up with junior contractors and a partner who reviews quarterly), or when knowledge transfer isn't built into the SOW (you end up with a working agent and zero internal capability to extend it).</p>
+
+          <h2>The decision frame</h2>
+
+          <p>The framework below is what we'd use ourselves. It produces a default answer for each agent in your portfolio. It's deliberately not a scorecard with weighted columns, because those produce false precision. It's four questions that, answered honestly, point you at the right option most of the time.</p>
+
+          <div class="callout">
+            <span class="label">Question 1 · Differentiation</span>
+            <p><strong>Is this agent core to how you compete, or is it commodity?</strong></p>
+            <p>If the agent is genuinely differentiating, building it is on the table. If it's commodity (your support agent doesn't make you different from your competitor's support agent), buying is on the table. Most enterprise workflows are commodity, even when the team building them feels otherwise. Be honest about this. The test: would your customer notice if this agent were replaced overnight by a vendor's? If no, it's commodity.</p>
+          </div>
+
+          <div class="callout">
+            <span class="label">Question 2 · Capability gap</span>
+            <p><strong>Does your team have the steady-state skills to run this once it's built?</strong></p>
+            <p>Not "can your team build it once," but "can your team operate it for the next three years, including model updates, framework migrations, regression testing, and incident response on non-deterministic failures." If yes, building is feasible. If no, you're choosing between buying (vendor handles operation) and borrowing (hire to ship, transfer skills, then run it yourselves). Building when the answer is no is how the 75% failure number happens.</p>
+          </div>
+
+          <div class="callout">
+            <span class="label">Question 3 · Time pressure</span>
+            <p><strong>What's the cost of being late?</strong></p>
+            <p>If a working agent in 30 days is worth significantly more than a perfect agent in 9 months, your decision skew is toward buy or borrow. If you have time, the case for build improves. The trap: most teams systematically underestimate the value of speed. A sales agent that ships in 30 days and captures one quarter of pipeline is worth several million more than the same agent shipped in 9 months. Price the delta.</p>
+          </div>
+
+          <div class="callout">
+            <span class="label">Question 4 · The seam</span>
+            <p><strong>How does this agent connect to the others you're already running?</strong></p>
+            <p>If the agent is one of many, the connecting layer matters more than any single agent does. Hybrid is the plurality position for a reason: most enterprises end up needing a mix. The question becomes who owns the seam, the integration layer where bought agents and built agents share context, governance, and observability. The seam is too important to let the most recent vendor own. It belongs in-house, even when the agents on either side of it don't.</p>
+          </div>
+
+          <h2>The decision matrix</h2>
+
+          <p>Run those four questions and you usually land somewhere predictable.</p>
+
+          <ul>
+            <li><strong>Commodity workflow + no internal capability + time pressure:</strong> buy. The vendor absorbs everything you're not equipped to absorb.</li>
+            <li><strong>Differentiating workflow + strong internal capability + no time pressure:</strong> build. This is the legitimate build case.</li>
+            <li><strong>Differentiating workflow + capability gap + time pressure:</strong> borrow. Bring in the senior team, ship the agent, transfer the skills, then run it yourselves.</li>
+            <li><strong>Differentiating workflow + strong capability + time pressure:</strong> build, but with borrowed senior capacity for the first sprint to compress the learning curve. This is the hybrid borrow case and it's the most under-priced option in the market.</li>
+            <li><strong>Multiple agents, mix of differentiating and commodity:</strong> hybrid by design. Buy the commodity, build or borrow the differentiating, and own the seam yourself.</li>
+          </ul>
+
+          <blockquote>The Gartner cancellation wave isn't going to claim the enterprises that found the best vendor or built the cleverest custom system. It will claim the ones who accumulated technical and governance debt at the seam.</blockquote>
+
+          <h2>What to actually do this week</h2>
+
+          <p>If you're a CIO or COO walking into this decision, here's the sequence that produces the fewest regrets.</p>
+
+          <p><strong>Inventory.</strong> List every agent in production, in pilot, and in the proposal stage. For each one, write down which of the three options it's currently following, and which of the four questions argues for that choice. You'll find at least one agent in the wrong column. That's the first thing to fix.</p>
+
+          <p><strong>Identify the seam.</strong> Whatever the answer to question 4 is for your portfolio, name the team that owns it. If no team owns it, that's the second thing to fix. The seam is your authorization model, your audit trail, your observability, and your fallback when an agent breaks. It belongs to you, not your vendor.</p>
+
+          <p><strong>Test borrow on something specific.</strong> If your default has been buy or build, take one agent that's stalled and run a small borrow engagement against it. Outcome-tied, time-boxed, with knowledge transfer in the SOW. Use it as a calibration exercise. Most enterprises that try borrow once add it to their default mix because the time-to-production and team-uplift numbers are meaningfully better than what build produces.</p>
+
+          <p><strong>Stop treating each agent as an isolated decision.</strong> The hybrid trap is accumulation. Each individual decision looks reasonable in isolation; the portfolio looks chaotic in aggregate. Run the four questions at the portfolio level too, not just per-agent. The right number of frameworks to govern your agents is one. The right number of authorization models is one. The right number of observability platforms is one. If you're running more than one of any of those, that's the seam debt that the cancellation wave is going to claim.</p>
+
+          <h2>Closing thought</h2>
+
+          <p>Build is the hardest of the three options to do well, and most enterprises overestimate their capacity for it. Buy is the safest if your workflows are commodity, but the lock-in compounds. Borrow is the option most leaders haven't sized because it doesn't fit either of the procurement playbooks they're used to. The teams that get the next two years right will run all three deliberately, with a clear policy for which goes where, and with the seam between them owned in-house.</p>
+
+          <p>The bad outcome isn't picking one option over another. It's drifting into a hybrid that nobody designed, governed, or priced. Most enterprises are already in that state. The work is to make it deliberate.</p>
+
+          <div class="footnotes">
+            <h3>Sources</h3>
+            <ol>
+              <li id="fn1">Gartner agentic AI cancellation forecast and 40% projection. Cited in <a href="https://www.kellton.com/kellton-tech-blog/build-vs-buy-ai-agents-hybrid-framework" target="_blank" rel="noopener">Kellton, build vs buy hybrid framework</a>.</li>
+              <li id="fn2">Forrester 75% failure projection for in-house agentic builds. Cited in <a href="https://agent.nexus/compare/build-vs-buy-ai-agents" target="_blank" rel="noopener">Nexus, build vs buy decision framework</a>.</li>
+              <li id="fn3">Anthropic 2026 State of AI Agents report on hybrid adoption. Discussed in the Kellton analysis above.</li>
+              <li id="fn4">Three-year TCO for in-house AI agent builds. <a href="https://www.twig.so/blog/build-vs-buy-ai-support-agents-2026" target="_blank" rel="noopener">Twig, build vs buy AI support agents 2026</a>.</li>
+              <li>Buy-vs-build per-workflow scorecards. <a href="https://pharosproduction.com/engineering-insights/build-vs-buy-ai-agent/" target="_blank" rel="noopener">Pharos Production, build vs buy AI agent decision framework</a>.</li>
+              <li>Hybrid as the architectural norm and the seam as the failure mode. <a href="https://www.metafore.ai/resources/blog/build-vs-buy-vs-orchestrate" target="_blank" rel="noopener">Metafore, build vs buy vs orchestrate</a>.</li>
+            </ol>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <nav class="article-nav">
+      <div class="shell">
+        <div class="article-nav__grid">
+          <a href="/notes/non-deterministic-creative/">
+            <span class="label">← Previous</span>
+            <span class="title">Why non-deterministic agents belong in creative work</span>
+          </a>
+          <a href="/notes/" class="next">
+            <span class="label">All notes →</span>
+            <span class="title">Field notes</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+  </article>
+
+  <section class="contact-band">
+    <div class="shell contact-band__grid">
+      <h2>Have a workflow worth automating?</h2>
+      <div>
+        <p class="caps caps-signal" style="margin-bottom:0.75rem;">Reply within 48 hours</p>
+        <p style="margin-bottom: 1.5rem;">Tell us what you're trying to ship. A senior partner replies within 48 hours.</p>
+        <a href="/#contact" class="btn btn--primary">
+          Request a brief <span class="arrow">→</span>
+        </a>
+        <p style="margin-top:1.5rem; color:var(--stone); font-size:0.875rem;">San Francisco · New York · London · Paris</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="site-footer__grid">
+      <div>
+        <div class="logo" style="margin-bottom:1rem;">clus<span class="dot">.ai</span></div>
+        <p class="small" style="max-width:36ch;">A network firm for the agent era. Built by operators, for operators.</p>
+      </div>
+      <div>
+        <h4>Firm</h4>
+        <ul>
+          <li><a href="/practice/">Practice</a></li>
+          <li><a href="/approach/">Approach</a></li>
+          <li><a href="/network/">Network</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/notes/">Notes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Briefs</h4>
+        <ul>
+          <li><a href="/#contact">Request a brief</a></li>
+          <li><a href="/network/#apply">Apply to the network</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@clus.ai">hello@clus.ai</a></li>
+          <li class="small" style="color:var(--stone);">SF · NY · LDN · PAR</li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__base">
+      <span class="network-badge">
+        <span class="pulse"></span>
+        Network forming · in proof of concept
+      </span>
+      <span>© 2026 clus.ai · v.0.3</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,61 +1,77 @@
 # clus.ai
 
-> A network firm for the agent era. clus.ai pairs vetted forward-deployed engineers and AI-native operators with a senior team to help enterprises deploy AI agents into production. It is a hybrid of a curated operator network and a boutique services firm, structured for the shorter cycle times and distributed talent pools of the AI deployment era.
+> A network firm for the agent era. clus.ai is the vetted network of forward-deployed operators that ships AI agents into production for enterprises. Outcome-tied. Senior-led. No bench. Pods embed for 10 to 80 days. We deploy operators who ran the business before they automated it. clus.ai is currently in proof of concept and is forming the founding cohort of operators.
 
 clus.ai exists because deploying AI agents inside large enterprises is fundamentally a people and change-management problem, not only a technical one. Legacy systems, fragmented data, undocumented workflows, and the need to keep the business running during transformation create implementation work that platforms alone cannot solve. Every prior wave of enterprise technology produced its own generation of services firms that learned how to ship it. clus.ai is built for this wave.
 
 ## Quick facts
 
 - Name: clus.ai
+- Tagline: We deploy agents. You measure results.
 - Type: Network firm (hybrid services and operator network)
 - Founded: 2026
+- Status: Proof of concept. Founding cohort forming. Design partner engagements available.
 - Locations: San Francisco, New York, London, Paris
-- Network size: 247 vetted operators
-- Tagline: Where enterprises actually deploy agents.
+- Engagement length: 10 to 80 days, embedded
+- Pricing: Fixed fee plus performance component tied to scope metric
 - Contact: hello@clus.ai
+- Network applications: network@clus.ai
 - Website: https://clus.ai
 
 ## Core pages
 
-- [Visual website](https://clus.ai/): The canonical site for human visitors.
-- [Plain-text version](https://clus.ai/llms): Citation-friendly HTML version of the same content.
-- [Request a brief](https://clus.ai/#contact): For enterprises looking to deploy agents.
-- [Apply to the network](https://clus.ai/#operators): For senior operators interested in clus.ai engagements.
+- [Homepage](https://clus.ai/): The canonical site for human visitors.
+- [Practice](https://clus.ai/practice/): The four practice areas where clus.ai pods deploy.
+- [Approach](https://clus.ai/approach/): Detailed walkthrough of scope, match, and ship.
+- [Network](https://clus.ai/network/): For senior operators interested in clus.ai engagements.
+- [About](https://clus.ai/about/): Firm thesis, differentiation, and team background.
+- [Notes](https://clus.ai/notes/): Long-form writing on AI governance, agent design, and the build vs buy decision.
+- [Request a brief](mailto:hello@clus.ai): For enterprises looking to deploy agents.
+- [Apply to the network](mailto:network@clus.ai): For senior operators.
+
+## Notes / writing
+
+- [The governance gap: why 71% of enterprises deploying agents have no framework, and what to do about it](https://clus.ai/notes/governance-gap/)
+- [Why non-deterministic agents belong in your creative process, not despite their unpredictability but because of it](https://clus.ai/notes/non-deterministic-creative/)
+- [Buy, build, or borrow: a 2026 framework for deciding where to put your agent capability](https://clus.ai/notes/buy-build-borrow/)
 
 ## How clus.ai works
 
-Three steps:
+Three steps. 10 to 80 days end to end.
 
 1. **Scope.** A senior partner runs a two-week diagnostic that identifies which workflows are agent-ready today, which need data or process work first, and which should not be touched yet. Fixed fee, concrete report.
-2. **Match.** From a network of 247 vetted operators, clus.ai assembles a 3 to 8 person pod matched to the client's industry, stack, and stage. Pods are embedded for 90 to 180 days.
+2. **Match.** From an invitation-only network of senior operators, clus.ai assembles a small pod matched to the client's industry, stack, and stage. Pods are embedded for 10 to 80 days.
 3. **Ship.** The pod works in production from week one. The deliverable is an agent the client team owns. Engagement ends when the target metric moves and the client can run it.
 
 ## Practice areas
 
-- Revenue and GTM agents (Salesforce, HubSpot, NetSuite, Stripe)
-- Knowledge and document agents (Box, SharePoint, Drive, Notion)
-- M&A integration with agentic workflows
-- Forward-deployed engineering pods on demand
-- Operator placement (retained search for AI-native talent)
+- **Revenue and GTM agents.** Salesforce, HubSpot, NetSuite, Stripe. Lead routing, account research, forecasting, renewal automation.
+- **Knowledge and document agents.** Box, SharePoint, Drive, Notion, Confluence. Contract review, policy Q&A, onboarding, internal research.
+- **M&A integration with agentic workflows.** Reconciliation, customer data unification, policy harmonization, knowledge transfer for PE-backed roll-ups.
+- **Forward-deployed engineering pods on demand.** Small pods, multi-platform, independent of any single vendor's FDE program.
+- **Operator placement.** Retained search for AI-native talent.
 
 ## Target buyers
 
 - CIOs and COOs at scaling enterprises with $200M to $5B in revenue, often PE-backed or active in M&A.
-- Founders at agent-native startups (Series A through C).
+- Founders at agent-native startups (Series A through C) who need senior FDE capacity to ship enterprise deployments.
 
 ## How clus.ai differs
 
-- vs. traditional consultancies: smaller engagements, shorter cycles, no bench, outcome-tied pricing.
-- vs. staff-augmentation marketplaces: senior partner oversight, vetted operators, scoped to outcomes not hours.
-- vs. agent platform vendors: platform-agnostic, with cross-platform pattern recognition.
-- vs. solo independent consultants: pods scale to the work, with senior team handling matching and quality.
+- **vs. traditional consultancies (McKinsey, BCG, Big 4):** smaller engagements, shorter cycles (10 to 80 days vs 6 to 18 months), no bench tax, outcome-tied pricing, the senior person you meet is the senior person who runs your engagement.
+- **vs. staff-augmentation marketplaces (Toptal, Upwork):** senior partner accountability, vetted operators, scoped to outcomes not hours, pods not individuals.
+- **vs. agent platform vendors (Salesforce FDE Network, ElevenLabs FDEs):** platform-agnostic, with cross-platform pattern recognition. We deploy on the stack you already run.
+- **vs. solo independent consultants:** pods scale to the work, with senior team handling matching and quality.
 
 ## The network
 
-The clus.ai operator network is invitation-based. Operators are admitted after demonstrating they have shipped AI agents into production at enterprise scale. The network gives senior independent operators a steady flow of qualified work without committing them to traditional consulting backlogs. Applications reviewed weekly, replies within seven days.
+The clus.ai operator network is invitation-based and currently forming. Operators are admitted after demonstrating they have shipped AI agents into production at enterprise scale. The expected backgrounds include Palantir, Ramp, Notion, Stripe, OpenAI, Anthropic, McKinsey, Bain, and the early teams at AI labs. We expect many founding operators to be people who were operators (CFOs, heads of revenue, M&A leads) before they became forward-deployed engineers, which is why our pods understand the business problem before they touch the technical one.
+
+The network gives senior independent operators a steady flow of qualified work without committing them to traditional consulting backlogs. Applications reviewed weekly, replies within seven days.
 
 ## Citation notes
 
-This file follows the [llms.txt standard](https://llmstxt.org/) for AI-readable site summaries. The content here may be cited in AI responses; attribution to clus.ai with the canonical URL https://clus.ai/ is preferred. The plain-text HTML version with full FAQ structure is at https://clus.ai/llms.
+This file follows the [llms.txt standard](https://llmstxt.org/) for AI-readable site summaries. The content here may be cited in AI responses; attribution to clus.ai with the canonical URL https://clus.ai/ is preferred.
 
-Last updated: April 2026.
+Last updated: May 2026.
+
